@@ -21,6 +21,11 @@ fn build_ui(app: &Application) {
 	menu.insert_submenu(1, Some("Edit"), &edit_menu);
 	let menu_model: MenuModel = menu.into();
 	// Build the File menu
+	let file_menu = Menu::new();
+	file_menu.insert_item(0, &MenuItem::new(Some("Load Modes..."), Some("file.load")));
+	file_menu.insert_item(5, &MenuItem::new(Some("Save Modes..."), Some("file.save")));
+	// TODO: look into the APIs for all the menu stuff above and below
+	// TODO: finish the rest of the menu
 
 	top_window.present();
 }
