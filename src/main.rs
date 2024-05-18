@@ -1,8 +1,10 @@
-use gtk::{prelude::*, PopoverMenuBar};
-use gtk::{glib, Application, ApplicationWindow};
+use gtk::prelude::*;
+use gtk::{glib, Application, ApplicationWindow, Button, PopoverMenuBar};
 use gtk::gio::{ActionEntry, Menu, MenuItem, MenuModel};
 
+
 const APP_ID: &str = "com.forjeon.miso";
+
 
 fn main() -> glib::ExitCode {
 	// Create the MISO GTK-RS application
@@ -25,7 +27,20 @@ Del → delete selected phase
 	app.run()
 }
 
+
 fn build_ui(app: &Application) {
+	// Create the Hello World button
+	let button = Button::builder()
+		.label("Press Me!")
+		.margin_top(12)
+		.margin_bottom(12)
+		.margin_start(12)
+		.margin_end(12)
+		.build();
+	button.connect_clicked(|button| {
+		button.set_label("Hellow World!");
+	});
+
 	// Build the menubar
 		// File menu
 	let file_menu = Menu::new();
@@ -43,16 +58,18 @@ fn build_ui(app: &Application) {
 		// Menubar
 	let menubar = PopoverMenuBar::from_model(Some(&menu_model));
 		// Window box to hold the menubar
-	let window_box = gtk::Box::builder()
+	let top_window_box = gtk::Box::builder()
 		.orientation(gtk::Orientation::Vertical)
 		.build();
-	window_box.append(&menubar);
+	top_window_box.append(&menubar);
+		// Show button
+	top_window_box.append(&button);
 	
 	// Top application window
 	let top_window = ApplicationWindow::builder()
 		.application(app)
 		.title("MISO")
-		.child(&window_box)
+		.child(&top_window_box)
 		.show_menubar(true)
 		.build();
 
