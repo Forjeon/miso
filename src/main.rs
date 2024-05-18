@@ -1,5 +1,6 @@
-use gtk::prelude::*;
+use gtk::{prelude::*, PopoverMenuBar};
 use gtk::{glib, Application, ApplicationWindow};
+use gtk::gio::{ActionEntry, Menu, MenuItem, MenuModel};
 
 const APP_ID: &str = "com.forjeon.miso";
 
@@ -10,23 +11,40 @@ fn main() -> glib::ExitCode {
 }
 
 fn build_ui(app: &Application) {
+	// Build the menubar
+		// File menu
+	let file_menu = Menu::new();
+	file_menu.insert_item(0, &MenuItem::new(Some("Save Modes..."), Some("file.save")));
+	file_menu.insert_item(5, &MenuItem::new(Some("Load Modes..."), Some("file.load")));
+		// Mode menu
+	let mode_menu = Menu::new();
+	mode_menu.insert_item(0, &MenuItem::new(Some("New Mode"), Some("mode.new")));
+	mode_menu.insert_item(5, &MenuItem::new(Some("Delete Mode"), Some("mode.del")));
+		// Menu model
+	let menu = Menu::new();
+	menu.insert_submenu(0, Some("File"), &file_menu);
+	menu.insert_submenu(1, Some("Mode"), &mode_menu);
+	let menu_model: MenuModel = menu.into();
+		// Menubar
+	let menubar = PopoverMenuBar::from_model(Some(&menu_model));
+		// Window box to hold the menubar
+	let window_box = gtk::Box::builder()
+		.orientation(gtk::Orientation::Vertical)
+		.build();
+	window_box.append(&menubar);
+	
+	// Top application window
 	let top_window = ApplicationWindow::builder()
 		.application(app)
 		.title("MISO")
+		.child(&window_box)
+		.show_menubar(true)
 		.build();
 
-	// Build the menubar
-	let menu = Menu::new();
-	menu.insert_submenu(0, Some("File"), &file_menu);
-	menu.insert_submenu(1, Some("Edit"), &edit_menu);
-	let menu_model: MenuModel = menu.into();
-	// Build the File menu
-	let file_menu = Menu::new();
-	file_menu.insert_item(0, &MenuItem::new(Some("Load Modes..."), Some("file.load")));
-	file_menu.insert_item(5, &MenuItem::new(Some("Save Modes..."), Some("file.save")));
-	// TODO: look into the APIs for all the menu stuff above and below
-	// TODO: finish the rest of the menu
+	// Menubar actions
+	// TODO: HERE
 
+	// Present the GUI
 	top_window.present();
 }
 /*
