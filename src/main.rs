@@ -5,8 +5,23 @@ use gtk::gio::{ActionEntry, Menu, MenuItem, MenuModel};
 const APP_ID: &str = "com.forjeon.miso";
 
 fn main() -> glib::ExitCode {
+	// Create the MISO GTK-RS application
 	let app = Application::builder().application_id(APP_ID).build();
 	app.connect_activate(build_ui);
+
+	// Keyboard accelerators (shortcut hotkeys)
+	// TODO: HERE
+	//app.set_accels_for_action("ACTIONNAME", &["ACTION KEYBOARD SHORTCUT"]);
+	/*
+Ctrl+SPACE → start/pause/resume
+Ctrl+Q → quit
+Ctrl+J → Jump to selected phase in timer
+Ctrl+N → create new phase
+Ctrl+D → duplicate selected phase
+Del → delete selected phase
+	*/
+
+	// Start MISO
 	app.run()
 }
 
