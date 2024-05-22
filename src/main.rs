@@ -1,3 +1,6 @@
+mod custom_button;
+
+use custom_button::CustomButton;
 use gtk::prelude::*;
 use gtk::{glib, Application, ApplicationWindow, Button, PopoverMenuBar};
 use gtk::gio::{ActionEntry, Menu, MenuItem, MenuModel};
@@ -30,6 +33,12 @@ Del → delete selected phase
 
 fn build_ui(app: &Application) {
 	// Create the Hello World button
+	let button = CustomButton::new();
+	button.set_margin_top(12);
+	button.set_margin_bottom(12);
+	button.set_margin_start(12);
+	button.set_margin_end(12);
+	/*
 	let button = Button::builder()
 		.label("Press Me!")
 		.margin_top(12)
@@ -40,6 +49,7 @@ fn build_ui(app: &Application) {
 	button.connect_clicked(|button| {
 		button.set_label("Hellow World!");
 	});
+	*/
 
 	// Build the menubar
 		// File menu
