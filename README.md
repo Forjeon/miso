@@ -1,8 +1,8 @@
-# PROJECT TITLE
+# Miso
 
 <img src="PATH/TO/PROJECT/LOGO" alt="PROJECT NAME logo" width="100"/>
 
-**PROJECT BRIEF DESCRIPTION**
+**MISO Is Study-break-timer Optimized!**
 
 ![TECH STACK BADGE](https://img.shields.io/badge/TECH_STACK-BADGE-98ABCD)
 
@@ -92,9 +92,9 @@ TODO
 
 ## License
 
-Copyright 2025 COPYRIGHT HOLDER
+Copyright 2025 Jonathan Forsgren
 
-This project is licensed under the [LICENSE license](PATH/TO/LICENSE/OR/LICENSE_FILE)
+This project is licensed under the [MIT license](https://github.com/Forjeon/miso/blob/main/LICENSE)
 
 
 
