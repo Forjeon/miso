@@ -100,3 +100,6 @@ compile_commands.json
 # Vim temp files
 *.swo
 *.swp
+
+# CMake build directory
+build/
